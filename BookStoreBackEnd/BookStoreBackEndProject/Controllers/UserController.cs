@@ -1,5 +1,6 @@
 ﻿using BookStoreBusinessLayer.Interface;
 using BookStoreCommonLayer.Modal;
+using BookStoreCommonLayer.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreBackEndProject.Controllers
@@ -35,5 +36,28 @@ namespace BookStoreBackEndProject.Controllers
                 throw;
             }
         }
+        [HttpPost]
+        [Route("UserLogin")]
+        public IActionResult LoginUser(UserLogin userLogin)
+        {
+            try
+            {
+                var result = iUserBL.LoginUser(userLogin);
+                if (result != null)
+                {
+                    return this.Ok(new { success = true, message = "Login Successfully", data = result });
+                }
+                else
+                {
+                    return this.BadRequest(new { success = false, message = "Login Unsuccessfull" });
+                }
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using BookStoreBusinessLayer.Interface;
 using BookStoreCommonLayer.Modal;
+using BookStoreCommonLayer.Model;
 using BookStoreRepositoryLayer.Interface;
 
 namespace BookStoreBusinessLayer.Services
@@ -22,6 +23,18 @@ namespace BookStoreBusinessLayer.Services
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+        public string LoginUser(UserLogin userLogin)
+        {
+            try
+            {
+                return iUserRL.LoginUser(userLogin);
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

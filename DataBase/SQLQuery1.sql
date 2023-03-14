@@ -19,10 +19,14 @@ Select * from BookStoreUser
 Create Table BookStoreDetail(
 	Book_Id bigint Identity (1,1) PRIMARY KEY,
 	Book_Name varchar (50) NOT NULL,
+	Book_Image varchar (max) NOT NULL,
 	Author_Name varchar (50) NOT NULL,
 	Price bigint NOT NULL,
+	Discount_Price bigint,
 	Detail varchar (150) NOT NULL,
 	Rating varchar (50) NOT NULL,
+	Rating_Count bigint, 
+	Book_Quantity bigint
 )
 
 Select * from BookStoreDetail
