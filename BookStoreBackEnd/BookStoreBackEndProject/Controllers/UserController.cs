@@ -58,6 +58,27 @@ namespace BookStoreBackEndProject.Controllers
                 throw;
             }
         }
+        [HttpPost]
+        [Route("ForgotPassword")]
+        public IActionResult ForgotPassword(string email)
+        {
+            try
+            {
+                string token = iUserBL.ForgetPassword(email);
+                if (token != null)
+                {
+                    return this.Ok(new { success = true, message = "Check your Email, Token sent Succesfully", data = token });
+                }
+                else
+                {
+                    return this.BadRequest(new { success = false, message = "Email Unregistered" });
+                }
+            }
+            catch (System.Exception)
+            {
 
+                throw;
+            }
+        }
     }
 }

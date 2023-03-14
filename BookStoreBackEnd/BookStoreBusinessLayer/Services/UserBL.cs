@@ -38,5 +38,17 @@ namespace BookStoreBusinessLayer.Services
                 throw;
             }
         }
+        public string ForgetPassword(string email)
+        {
+            try
+            {
+                return iUserRL.ForgetPassword(email);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

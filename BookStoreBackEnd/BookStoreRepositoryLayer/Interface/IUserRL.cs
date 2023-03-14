@@ -10,6 +10,7 @@ namespace BookStoreRepositoryLayer.Interface
     {
         public UserRegistration UserRegister(UserRegistration userRegistration);
         public string LoginUser(UserLogin userLogin);
+        public string ForgetPassword(string email);
 
     }
 }

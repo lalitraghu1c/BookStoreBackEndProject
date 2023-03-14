@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -106,6 +107,39 @@ namespace BookStoreRepositoryLayer.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
+        }
+        public string ForgetPassword(string Email_Id)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            using (sqlConnection)
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("SPUserForgotPassword", sqlConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Email_Id", Email_Id);
+                    sqlConnection.Open();
+                    SqlDataReader rd = cmd.ExecuteReader();
+                    if (rd.HasRows)
+                    {
+                        while (rd.Read())
+                        {
+                            var Id = Convert.ToInt32(rd["Id"] == DBNull.Value ? default : rd["Id"]);
+                            var token = this.GenerateSecurityToken(Email_Id, Id.ToString());
+                            MSMQModel msmq = new MSMQModel();
+                            msmq.sendData2Queue(token);
+                            return token;
+                        }
+
+                    }
+                    sqlConnection.Close();
+                    return null;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
 
         }
     }
