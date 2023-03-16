@@ -84,7 +84,21 @@ namespace BookStoreRepositoryLayer.Services
 
                 throw;
             }
-
+        }
+        public bool DeleteBook(long bookid)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("SPDeleteBook", sqlConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Book_Id", bookid);
+            sqlConnection.Open();
+            int i = cmd.ExecuteNonQuery();
+            sqlConnection.Close();
+            if (i >= 1)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

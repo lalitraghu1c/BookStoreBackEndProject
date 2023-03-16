@@ -40,5 +40,17 @@ namespace BookStoreBusinessLayer.Services
                 throw;
             }
         }
+        public bool DeleteBook(long bookid)
+        {
+            try
+            {
+                return this.bookrl.DeleteBook(bookid);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

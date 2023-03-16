@@ -24,7 +24,7 @@ namespace BookStoreBackEndProject.Controllers
                 var result = this.bookBL.AddBook(bookModel);
                 if (result != null)
                 {
-                    return this.Ok(new { Success = true, message = "Book Added Sucessfull", Response = result });
+                    return this.Ok(new { Success = true, message = "Book Added Sucessfull", data = result });
                 }
                 else
                 {
@@ -49,6 +49,27 @@ namespace BookStoreBackEndProject.Controllers
                 else
                 {
                     return this.BadRequest(new { Success = false, message = "Book details not updated" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
+        [HttpDelete("Delete")]
+        public IActionResult DeleteBook(long bookid)
+        {
+            try
+            {
+                var result = this.bookBL.DeleteBook(bookid);
+                if (result != null)
+
+                {
+                    return this.Ok(new { Success = true, message = "Book Deleted Sucessfull", data = result });
+                }
+                else
+                {
+                    return this.BadRequest(new { Success = false, message = "Unable to delete" });
                 }
             }
             catch (Exception ex)
