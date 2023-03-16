@@ -11,5 +11,6 @@ namespace BookStoreRepositoryLayer.Interface
         public BookModel UpdateBook(BookModel bookModel, long bookid);
         public bool DeleteBook(long bookid);
         public List<BookModel> GetAllBooks();
+        public object GetBookDetail(long bookid);
     }
 }

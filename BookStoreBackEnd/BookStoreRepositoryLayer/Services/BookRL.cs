@@ -138,5 +138,33 @@ namespace BookStoreRepositoryLayer.Services
                     throw;
                 }
         }
+        public object GetBookDetail(long bookid)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("SPGetBookByBook_Id", sqlConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Book_Id", bookid);
+            sqlConnection.Open();
+            BookModel bookmodel = new BookModel();
+            SqlDataReader rd = cmd.ExecuteReader();
+            if (rd.HasRows)
+            {
+                while (rd.Read())
+                {
+                    bookmodel.Book_Id = Convert.ToInt32(rd["Book_Id"]);
+                    bookmodel.BookName = rd["BookName"].ToString();
+                    bookmodel.AuthorName = rd["AuthorName"].ToString();
+                    bookmodel.Rating = rd["Rating"].ToString();
+                    bookmodel.TotalCountRating = Convert.ToInt32(rd["TotalCountRating"]);
+                    bookmodel.DiscountPrice = Convert.ToInt32(rd["DiscountPrice"]);
+                    bookmodel.OriginalPrice = Convert.ToInt32(rd["OriginalPrice"]);
+                    bookmodel.Deetail = rd["Deetail"].ToString();
+                    bookmodel.BookImage = rd["BookImage"].ToString();
+                    bookmodel.BookCount = Convert.ToInt32(rd["BookCount"]);
+                }
+                return bookmodel;
+            }
+            return null;
+        }
     }
 }

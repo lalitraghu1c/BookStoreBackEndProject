@@ -98,5 +98,26 @@ namespace BookStoreBackEndProject.Controllers
                 throw;
             }
         }
+        [HttpGet("Get single Book")]
+        public IActionResult GetBookDetail(long bookid)
+        {
+            try
+            {
+                var result = this.bookBL.GetBookDetail(bookid);
+                if (result != null)
+
+                {
+                    return this.Ok(new { Success = true, message = "Book Details", data = result });
+                }
+                else
+                {
+                    return this.BadRequest(new { Success = false, message = "Unable to get details" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
     }
 }

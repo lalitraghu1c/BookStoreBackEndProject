@@ -65,5 +65,17 @@ namespace BookStoreBusinessLayer.Services
                 throw;
             }
         }
+        public object GetBookDetail(long bookid)
+        {
+            try
+            {
+                return this.bookrl.GetBookDetail(bookid);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
