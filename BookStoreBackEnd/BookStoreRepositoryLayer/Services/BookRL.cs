@@ -36,7 +36,7 @@ namespace BookStoreRepositoryLayer.Services
                     cmd.Parameters.AddWithValue("@TotalCountRating", bookModel.TotalCountRating);
                     cmd.Parameters.AddWithValue("@DiscountPrice", bookModel.DiscountPrice);
                     cmd.Parameters.AddWithValue("@OriginalPrice", bookModel.OriginalPrice);
-                    cmd.Parameters.AddWithValue("@Detail", bookModel.Detail);
+                    cmd.Parameters.AddWithValue("@Detail", bookModel.Deetail);
                     cmd.Parameters.AddWithValue("@BookImage", bookModel.BookImage);
                     cmd.Parameters.AddWithValue("@BookCount", bookModel.BookCount);
                     sqlConnection.Open();
@@ -66,7 +66,7 @@ namespace BookStoreRepositoryLayer.Services
                     cmd.Parameters.AddWithValue("@TotalCountRating", bookModel.TotalCountRating);
                     cmd.Parameters.AddWithValue("@DiscountPrice", bookModel.DiscountPrice);
                     cmd.Parameters.AddWithValue("@OriginalPrice", bookModel.OriginalPrice);
-                    cmd.Parameters.AddWithValue("@Detail", bookModel.Detail);
+                    cmd.Parameters.AddWithValue("@Detail", bookModel.Deetail);
                     cmd.Parameters.AddWithValue("@BookImage", bookModel.BookImage);
                     cmd.Parameters.AddWithValue("@BookCount", bookModel.BookCount);
                     sqlConnection.Open();
@@ -99,6 +99,44 @@ namespace BookStoreRepositoryLayer.Services
                 return true;
             }
             return false;
+        }
+        public List<BookModel> GetAllBooks()
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            using (sqlConnection)
+                try
+                {
+                    List<BookModel> addBook = new List<BookModel>();
+                    SqlCommand cmd = new SqlCommand("SPGetAllBooks", sqlConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    sqlConnection.Open();
+                    dataAdapter.Fill(dt);
+                    foreach (DataRow rd in dt.Rows)
+                    {
+                        addBook.Add(
+                            new BookModel
+                            {
+                                Book_Id = Convert.ToInt32(rd["Book_Id"]),
+                                BookName = rd["BookName"].ToString(),
+                                AuthorName = rd["AuthorName"].ToString(),
+                                Rating = rd["Rating"].ToString(),
+                                TotalCountRating = Convert.ToInt32(rd["TotalCountRating"]),
+                                DiscountPrice = Convert.ToInt32(rd["DiscountPrice"]),
+                                OriginalPrice = Convert.ToInt32(rd["OriginalPrice"]),
+                                Deetail = rd["Deetail"].ToString(),
+                                BookImage = rd["BookImage"].ToString(),
+                                BookCount = Convert.ToInt32(rd["BookCount"]),
+                            }
+                            );
+                    }
+                    return addBook;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
         }
     }
 }

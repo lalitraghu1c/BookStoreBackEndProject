@@ -3,6 +3,7 @@ using BookStoreCommonLayer.Model;
 using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using DocumentFormat.OpenXml.Drawing.Charts;
 
 namespace BookStoreBackEndProject.Controllers
 {
@@ -75,6 +76,26 @@ namespace BookStoreBackEndProject.Controllers
             catch (Exception ex)
             {
                 return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
+        [HttpGet("Get all Books")]
+        public IActionResult GetAllBooks()
+        {
+            try
+            {
+                var result = bookBL.GetAllBooks();
+                if (result != null)
+                {
+                    return this.Ok(new { Success = true, message = "All Book Details", data = result });
+                }
+                else
+                {
+                    return this.BadRequest(new { Success = false, message = "Unable to get details" });
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

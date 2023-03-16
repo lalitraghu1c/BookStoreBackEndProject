@@ -10,5 +10,6 @@ namespace BookStoreBusinessLayer.Interface
         public BookModel AddBook(BookModel bookModel);
         public BookModel UpdateBook(BookModel bookModel, long bookid);
         public bool DeleteBook(long bookid);
+        public List<BookModel> GetAllBooks();
     }
 }
