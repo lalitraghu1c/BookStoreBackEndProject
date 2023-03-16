@@ -1,0 +1,40 @@
+﻿using BookStoreBusinessLayer.Interface;
+using BookStoreCommonLayer.Model;
+using System;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace BookStoreBackEndProject.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class BookController : ControllerBase
+    {
+        IBookBL bookBL;
+        public BookController(IBookBL bookBL)
+        {
+            this.bookBL = bookBL;
+
+        }
+        [HttpPost("Add")]
+        public IActionResult AddBook(BookModel bookModel)
+        {
+            try
+            {
+                var result = this.bookBL.AddBook(bookModel);
+                if (result != null)
+                {
+                    return this.Ok(new { Success = true, message = "Book Added Sucessfull", Response = result });
+                }
+                else
+                {
+                    return this.BadRequest(new { Success = false, message = "Book not added" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
+    }
+}
