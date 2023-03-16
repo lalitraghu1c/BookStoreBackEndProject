@@ -8,7 +8,7 @@ Create Procedure SPBookStoreUser (
 )
 as
 Begin
-	Insert into BookStoreUser (Full_Name,Email_Id,Password, Mobile_Number)         
+	Insert into BookStoreUser (Full_Name,Email_Id,Password,Mobile_Number)         
     Values (@Full_Name,@Email_Id,@Password, @Mobile_Number) 
 End
 

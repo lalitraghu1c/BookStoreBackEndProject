@@ -147,19 +147,22 @@ namespace BookStoreRepositoryLayer.Services
             {
                 if (resetPasswordModel.New_Password == resetPasswordModel.Confirm_Password)
                 {
-                    SqlCommand cmd = new SqlCommand("SPUserResetPassword", sqlConnection);
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Email_Id", email);
-                    cmd.Parameters.AddWithValue("@Password", resetPasswordModel.New_Password);
-                    sqlConnection.Open();
-                    int result = cmd.ExecuteNonQuery();
-                    if (result >= 1)
+                    using (sqlConnection)
                     {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
+                        SqlCommand cmd = new SqlCommand("SPUserResetPassword", sqlConnection);
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Email_Id", email);
+                        cmd.Parameters.AddWithValue("@Password", resetPasswordModel.New_Password);
+                        sqlConnection.Open();
+                        int result = cmd.ExecuteNonQuery();
+                        if (result >= 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
                 }
                 else

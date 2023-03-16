@@ -36,10 +36,13 @@ namespace BookStoreBackEndProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddTransient<IUserBL, UserBL>(); // registration
+            services.AddTransient<IUserBL, UserBL>(); // user
             services.AddTransient<IUserRL, UserRL>();
+
+            services.AddTransient<IAdminBL, AdminBL>(); // admin
+            services.AddTransient<IAdminRL, AdminRL>();
             services.AddSwaggerGen();
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(c => 
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
