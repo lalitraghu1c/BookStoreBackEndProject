@@ -8,5 +8,6 @@ namespace BookStoreBusinessLayer.Interface
     public interface IBookBL
     {
         public BookModel AddBook(BookModel bookModel);
+        public BookModel UpdateBook(BookModel bookModel, long bookid);
     }
 }

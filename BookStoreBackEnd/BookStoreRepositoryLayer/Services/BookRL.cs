@@ -28,19 +28,19 @@ namespace BookStoreRepositoryLayer.Services
             {
                 using (sqlConnection)
                 {
-                    SqlCommand com = new SqlCommand("SPAddNewBook", sqlConnection);
-                    com.CommandType = CommandType.StoredProcedure;
-                    com.Parameters.AddWithValue("@BookName", bookModel.BookName);
-                    com.Parameters.AddWithValue("@AuthorName", bookModel.AuthorName);
-                    com.Parameters.AddWithValue("@Rating", bookModel.Rating);
-                    com.Parameters.AddWithValue("@TotalCountRating", bookModel.TotalCountRating);
-                    com.Parameters.AddWithValue("@DiscountPrice", bookModel.DiscountPrice);
-                    com.Parameters.AddWithValue("@OriginalPrice", bookModel.OriginalPrice);
-                    com.Parameters.AddWithValue("@Detail", bookModel.Detail);
-                    com.Parameters.AddWithValue("@BookImage", bookModel.BookImage);
-                    com.Parameters.AddWithValue("@BookCount", bookModel.BookCount);
+                    SqlCommand cmd = new SqlCommand("SPAddNewBook", sqlConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@BookName", bookModel.BookName);
+                    cmd.Parameters.AddWithValue("@AuthorName", bookModel.AuthorName);
+                    cmd.Parameters.AddWithValue("@Rating", bookModel.Rating);
+                    cmd.Parameters.AddWithValue("@TotalCountRating", bookModel.TotalCountRating);
+                    cmd.Parameters.AddWithValue("@DiscountPrice", bookModel.DiscountPrice);
+                    cmd.Parameters.AddWithValue("@OriginalPrice", bookModel.OriginalPrice);
+                    cmd.Parameters.AddWithValue("@Detail", bookModel.Detail);
+                    cmd.Parameters.AddWithValue("@BookImage", bookModel.BookImage);
+                    cmd.Parameters.AddWithValue("@BookCount", bookModel.BookCount);
                     sqlConnection.Open();
-                    com.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                     sqlConnection.Close();
                     return bookModel;
                 }
@@ -49,6 +49,42 @@ namespace BookStoreRepositoryLayer.Services
             {
                 throw new Exception(e.Message);
             }
+        }
+        public BookModel UpdateBook(BookModel bookModel, long bookid)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            try
+            {
+                using (sqlConnection)
+                {
+                    SqlCommand cmd = new SqlCommand("SPUpdateBook", sqlConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Book_Id", bookid);
+                    cmd.Parameters.AddWithValue("@BookName", bookModel.BookName);
+                    cmd.Parameters.AddWithValue("@AuthorName", bookModel.AuthorName);
+                    cmd.Parameters.AddWithValue("@Rating", bookModel.Rating);
+                    cmd.Parameters.AddWithValue("@TotalCountRating", bookModel.TotalCountRating);
+                    cmd.Parameters.AddWithValue("@DiscountPrice", bookModel.DiscountPrice);
+                    cmd.Parameters.AddWithValue("@OriginalPrice", bookModel.OriginalPrice);
+                    cmd.Parameters.AddWithValue("@Detail", bookModel.Detail);
+                    cmd.Parameters.AddWithValue("@BookImage", bookModel.BookImage);
+                    cmd.Parameters.AddWithValue("@BookCount", bookModel.BookCount);
+                    sqlConnection.Open();
+                    int i = cmd.ExecuteNonQuery();
+                    sqlConnection.Close();
+                    if (i >= 1)
+                    {
+                        return bookModel;
+                    }
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
     }
 }

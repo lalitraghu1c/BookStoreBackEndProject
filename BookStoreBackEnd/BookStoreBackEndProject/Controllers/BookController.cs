@@ -16,7 +16,7 @@ namespace BookStoreBackEndProject.Controllers
             this.bookBL = bookBL;
 
         }
-        [HttpPost("Add")]
+        [HttpPost("Add Book")]
         public IActionResult AddBook(BookModel bookModel)
         {
             try
@@ -29,6 +29,26 @@ namespace BookStoreBackEndProject.Controllers
                 else
                 {
                     return this.BadRequest(new { Success = false, message = "Book not added" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
+        [HttpPost("Update Book")]
+        public IActionResult UpdateBook(BookModel bookModel, long bookid)
+        {
+            try
+            {
+                var result = this.bookBL.UpdateBook(bookModel, bookid);
+                if (result != null)
+                {
+                    return this.Ok(new { Success = true, message = "Book Updated Sucessfull", data = result });
+                }
+                else
+                {
+                    return this.BadRequest(new { Success = false, message = "Book details not updated" });
                 }
             }
             catch (Exception ex)

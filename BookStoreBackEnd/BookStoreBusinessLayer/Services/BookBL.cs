@@ -28,5 +28,17 @@ namespace BookStoreBusinessLayer.Services
                 throw;
             }
         }
+        public BookModel UpdateBook(BookModel bookModel, long bookid)
+        {
+            try
+            {
+                return this.bookrl.UpdateBook(bookModel, bookid);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

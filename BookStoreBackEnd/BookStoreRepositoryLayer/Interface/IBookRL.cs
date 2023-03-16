@@ -8,5 +8,6 @@ namespace BookStoreRepositoryLayer.Interface
     public interface IBookRL
     {
         public BookModel AddBook(BookModel bookModel);
+        public BookModel UpdateBook(BookModel bookModel, long bookid);
     }
 }
