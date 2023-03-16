@@ -35,3 +35,14 @@ as
 Begin 
 Select * From BookStoreUser where Email_Id=@Email_Id
 END
+
+---------------Store Procedure for Reset Password-----------------
+
+Create Procedure SPUserResetPassword(
+	@Email_Id varchar(50),
+	@Password varchar(200)
+)
+as
+Begin 
+Select * From BookStoreUser where Email_Id=@Email_Id
+END

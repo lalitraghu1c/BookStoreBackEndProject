@@ -1,6 +1,9 @@
-﻿using BookStoreBusinessLayer.Interface;
+﻿using System;
+using System.Security.Claims;
+using BookStoreBusinessLayer.Interface;
 using BookStoreCommonLayer.Modal;
 using BookStoreCommonLayer.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreBackEndProject.Controllers
@@ -16,7 +19,7 @@ namespace BookStoreBackEndProject.Controllers
         }
         //Entring the data in the database
         [HttpPost]
-        [Route("UserRegistration")]
+        [Route("User Registration")]
         public IActionResult UserRegister(UserRegistration userRegistration)
         {
             try
@@ -37,7 +40,7 @@ namespace BookStoreBackEndProject.Controllers
             }
         }
         [HttpPost]
-        [Route("UserLogin")]
+        [Route("User Login")]
         public IActionResult LoginUser(UserLogin userLogin)
         {
             try
@@ -59,7 +62,7 @@ namespace BookStoreBackEndProject.Controllers
             }
         }
         [HttpPost]
-        [Route("ForgotPassword")]
+        [Route("Forgot Password")]
         public IActionResult ForgotPassword(string email)
         {
             try
@@ -67,7 +70,7 @@ namespace BookStoreBackEndProject.Controllers
                 string token = iUserBL.ForgetPassword(email);
                 if (token != null)
                 {
-                    return this.Ok(new { success = true, message = "Check your Email, Token sent Succesfully", data = token });
+                    return this.Ok(new { success = true, message = "Check your Email, Token has been sent Succesfully", data = token });
                 }
                 else
                 {
@@ -77,6 +80,29 @@ namespace BookStoreBackEndProject.Controllers
             catch (System.Exception)
             {
 
+                throw;
+            }
+        }
+        [Authorize]
+        [HttpPut]
+        [Route("Reset Password")]
+        public IActionResult ResetPassword(ResetPasswordModel resetPasswordModel)
+        {
+            try
+            {
+                var email = User.FindFirst(ClaimTypes.Email).Value.ToString();
+                var data = iUserBL.ResetPassword(email, resetPasswordModel);
+                if (data)
+                {
+                    return this.Ok(new { Success = true, message = "Your password has been changed sucessfully" });
+                }
+                else
+                {
+                    return this.BadRequest(new { Success = false, message = "Unable to reset password. Please try again" });
+                }
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

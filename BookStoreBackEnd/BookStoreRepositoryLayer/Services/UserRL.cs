@@ -130,7 +130,6 @@ namespace BookStoreRepositoryLayer.Services
                             msmq.sendData2Queue(token);
                             return token;
                         }
-
                     }
                     sqlConnection.Close();
                     return null;
@@ -140,7 +139,45 @@ namespace BookStoreRepositoryLayer.Services
                     throw;
                 }
             }
-
+        }
+        public bool ResetPassword(string email, ResetPasswordModel resetPasswordModel)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            try
+            {
+                if (resetPasswordModel.New_Password == resetPasswordModel.Confirm_Password)
+                {
+                    SqlCommand cmd = new SqlCommand("SPUserResetPassword", sqlConnection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Email_Id", email);
+                    cmd.Parameters.AddWithValue("@Password", resetPasswordModel.New_Password);
+                    sqlConnection.Open();
+                    int result = cmd.ExecuteNonQuery();
+                    if (result >= 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (sqlConnection.State == ConnectionState.Open)
+                {
+                    sqlConnection.Close();
+                }
+            }
         }
     }
 }

@@ -35,7 +35,7 @@ namespace BookStoreCommonLayer.Model
             var smtp = new SmtpClient("smtp.gmail.com")
             {
                 Port = 587,
-                Credentials = new NetworkCredential("samrat.raghu1c@gmail.com", "yfbvphulurxuccgm"),
+                Credentials = new NetworkCredential("samrat.raghu1c@gmail.com", "cxoabkamufdvqerv"),
                 EnableSsl = true
             };
             smtp.Send("samrat.raghu1c@gmail.com", "samrat.raghu1c@gmail.com", subject, body);

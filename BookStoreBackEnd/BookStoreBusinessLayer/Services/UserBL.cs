@@ -50,5 +50,17 @@ namespace BookStoreBusinessLayer.Services
                 throw;
             }
         }
+        public bool ResetPassword(string email, ResetPasswordModel resetPasswordModel)
+        {
+            try
+            {
+                return iUserRL.ResetPassword(email, resetPasswordModel);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
