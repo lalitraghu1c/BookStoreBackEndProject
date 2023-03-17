@@ -13,7 +13,7 @@ namespace BookStoreCommonLayer.Model
         public int TotalCountRating { get; set; }
         public int DiscountPrice { get; set; }
         public int OriginalPrice { get; set; }
-        public string Deetail { get; set; }
+        public string Detail { get; set; }
         public string BookImage { get; set; }
         public int BookCount { get; set; }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using BookStoreCommonLayer.Model;
+using Microsoft.AspNetCore.Http;
 
 namespace BookStoreRepositoryLayer.Interface
 {
@@ -12,5 +13,6 @@ namespace BookStoreRepositoryLayer.Interface
         public bool DeleteBook(long bookid);
         public List<BookModel> GetAllBooks();
         public object GetBookDetail(long bookid);
+        public bool BookImageUpdate(ImageUploadModel imageUploadModel);
     }
 }

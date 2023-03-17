@@ -7,9 +7,6 @@ Create Table BookTable(
 	DiscountPrice INT,
 	OriginalPrice INT,
 	Deetail VARCHAR (500),
-	BookImage VARCHAR (max),
+	BookImage VARCHAR (200),
 	BookCount INT NOT NULL
 )
-
-Select * from BookStoreDetail
-Drop table BookTable

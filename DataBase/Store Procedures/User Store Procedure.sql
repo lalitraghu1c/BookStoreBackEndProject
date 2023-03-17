@@ -44,5 +44,11 @@ Create Procedure SPUserResetPassword(
 )
 as
 Begin 
-Select * From BookStoreUser where Email_Id=@Email_Id
+Update BookStoreUser set Password=@Password where Email_Id=@Email_Id
 END
+
+
+
+drop procedure SPUserResetPassword
+
+EXEC SPUserResetPassword 'lalitraghu@gmail.com','lalit123456@'

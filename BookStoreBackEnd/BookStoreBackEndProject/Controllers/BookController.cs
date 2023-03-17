@@ -119,5 +119,26 @@ namespace BookStoreBackEndProject.Controllers
                 return this.BadRequest(new { Success = false, message = ex.Message });
             }
         }
+        [HttpPost("Image Upload")]
+        public IActionResult BookImageUpdate([FromForm] ImageUploadModel imageUploadModel)
+        {
+            try
+            {
+                var result = bookBL.BookImageUpdate(imageUploadModel);
+                if (result != null)
+
+                {
+                    return this.Ok(new { Success = true, message = "Image Uploaded Successfully", data = result });
+                }
+                else
+                {
+                    return this.BadRequest(new { Success = false, message = "Unable to upload Image" });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

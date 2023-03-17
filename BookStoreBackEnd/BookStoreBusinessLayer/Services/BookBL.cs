@@ -4,6 +4,7 @@ using System.Text;
 using BookStoreBusinessLayer.Interface;
 using BookStoreCommonLayer.Model;
 using BookStoreRepositoryLayer.Interface;
+using Microsoft.AspNetCore.Http;
 
 namespace BookStoreBusinessLayer.Services
 {
@@ -74,6 +75,17 @@ namespace BookStoreBusinessLayer.Services
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+        public bool BookImageUpdate(ImageUploadModel imageUploadModel)
+        {
+            try
+            {
+                return this.bookrl.BookImageUpdate(imageUploadModel);
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
