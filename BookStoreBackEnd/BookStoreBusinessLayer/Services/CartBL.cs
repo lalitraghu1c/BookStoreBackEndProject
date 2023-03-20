@@ -26,5 +26,17 @@ namespace BookStoreBusinessLayer.Services
                 throw;
             }
         }
+        public bool RemoveCart(int CartId)
+        {
+            try
+            {
+                return icartRL.RemoveCart(CartId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

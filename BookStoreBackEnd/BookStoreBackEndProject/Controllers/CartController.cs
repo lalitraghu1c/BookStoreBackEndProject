@@ -43,5 +43,28 @@ namespace BookStoreBackEndProject.Controllers
                 throw ex;
             }
         }
+        //[Authorize]
+        [HttpDelete]
+        [Route("Delete")]
+        public ActionResult RemoveCart(int cartId)
+        {
+            try
+            {
+                var result = this.icartBL.RemoveCart(cartId);
+                if (result != null)
+                {
+                    return this.Ok(new { success = true, message = "Delete Successfull", data = result });
+                }
+                else
+                {
+                    return this.BadRequest(new { success = false, message = "Delete Unsuccessfull", data = result });
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }
