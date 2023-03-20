@@ -91,5 +91,51 @@ namespace BookStoreBackEndProject.Controllers
                 throw e;
             }
         }
+        [HttpPost]
+        [Route("GetCartByUserId")]
+        public IActionResult GetCartByUserId(CartByUser cartByUser)
+        {
+            try
+            {
+                var result = icartBL.GetCartByUserId(cartByUser);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "Get All Cart", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "Try Again" });
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [Route("GetCartByCartId")]
+        public IActionResult GetCartByCartId(int CartId)
+        {
+            try
+            {
+                int UserId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "Id").Value);
+                var result = icartBL.GetCartByCartId(UserId, CartId);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "Get All Cart", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "Try Again" });
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

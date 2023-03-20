@@ -4,6 +4,7 @@ using System.Data;
 using BookStoreCommonLayer.Model;
 using Microsoft.Extensions.Configuration;
 using BookStoreRepositoryLayer.Interface;
+using System.Collections.Generic;
 
 namespace BookStoreRepositoryLayer.Services
 {
@@ -109,6 +110,96 @@ namespace BookStoreRepositoryLayer.Services
             {
 
                 throw ex;
+            }
+        }
+        public IEnumerable<GetCartByUser> GetCartByUserId(CartByUser cartByUser)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            try
+            {
+                sqlConnection = new SqlConnection(connectionString);
+                SqlCommand cmd = new SqlCommand("spGetCartByUserId", sqlConnection);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Id", cartByUser.Id);
+
+                sqlConnection.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                if (!rdr.HasRows)
+                {
+                    return null;
+                }
+                List<GetCartByUser> GetCartOfUserList = new List<GetCartByUser>();
+
+                while (rdr.Read())
+                {
+                    GetCartByUser getCartByUser = new GetCartByUser();
+
+                    getCartByUser.CartId = Convert.ToInt32(rdr["CartId"]);
+                    getCartByUser.Id = Convert.ToInt32(rdr["Id"]);
+                    getCartByUser.Book_Id = Convert.ToInt32(rdr["Book_Id"]);
+                    getCartByUser.Book_Quantity = Convert.ToInt32(rdr["Book_Quantity"]);
+                    GetCartOfUserList.Add(getCartByUser);
+                }
+                sqlConnection.Close();
+                return GetCartOfUserList;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (sqlConnection.State == ConnectionState.Open)
+                {
+                    sqlConnection.Close();
+                }
+            }
+        }
+
+        public IEnumerable<GetCartByUser> GetCartByCartId(int Id, int CartId)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            try
+            {
+                sqlConnection = new SqlConnection(connectionString);
+                SqlCommand cmd = new SqlCommand("SP_GetCartByCartId", sqlConnection);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Id", Id);
+                cmd.Parameters.AddWithValue("@CartId", CartId);
+
+                sqlConnection.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                if (!rdr.HasRows)
+                {
+                    return null;
+                }
+                List<GetCartByUser> GetCartOfUserList = new List<GetCartByUser>();
+
+                while (rdr.Read())
+                {
+                    GetCartByUser getCartByUser = new GetCartByUser();
+
+                    getCartByUser.CartId = Convert.ToInt32(rdr["CartId"]);
+                    getCartByUser.Id = Convert.ToInt32(rdr["Id"]);
+                    getCartByUser.Book_Id = Convert.ToInt32(rdr["Book_Id"]);
+                    getCartByUser.Book_Quantity = Convert.ToInt32(rdr["Book_Quantity"]);
+                    GetCartOfUserList.Add(getCartByUser);
+                }
+                sqlConnection.Close();
+                return GetCartOfUserList;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (sqlConnection.State == ConnectionState.Open)
+                {
+                    sqlConnection.Close();
+                }
             }
         }
     }

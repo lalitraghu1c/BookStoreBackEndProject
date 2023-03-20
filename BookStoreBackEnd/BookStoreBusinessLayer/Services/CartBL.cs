@@ -4,6 +4,7 @@ using System.Text;
 using BookStoreBusinessLayer.Interface;
 using BookStoreCommonLayer.Model;
 using BookStoreRepositoryLayer.Interface;
+using BookStoreRepositoryLayer.Services;
 
 namespace BookStoreBusinessLayer.Services
 {
@@ -43,6 +44,31 @@ namespace BookStoreBusinessLayer.Services
             try
             {
                 return icartRL.UpdateCart(CartId, cartModel, UserId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public IEnumerable<GetCartByUser> GetCartByCartId(int UserId, int CartId)
+        {
+            try
+            {
+                return icartRL.GetCartByCartId(UserId, CartId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public IEnumerable<GetCartByUser> GetCartByUserId(CartByUser cartByUser)
+        {
+            try
+            {
+                return icartRL.GetCartByUserId(cartByUser);
             }
             catch (Exception)
             {
