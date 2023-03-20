@@ -4,6 +4,7 @@ using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DocumentFormat.OpenXml.Drawing.Charts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookStoreBackEndProject.Controllers
 {
@@ -17,7 +18,10 @@ namespace BookStoreBackEndProject.Controllers
             this.bookBL = bookBL;
 
         }
-        [HttpPost("Add Book")]
+
+        [Authorize(Roles = Role.Admin)]
+        [HttpPost]
+        [Route("Add Book")]
         public IActionResult AddBook(BookModel bookModel)
         {
             try
@@ -37,7 +41,10 @@ namespace BookStoreBackEndProject.Controllers
                 return this.BadRequest(new { Success = false, message = ex.Message });
             }
         }
-        [HttpPost("Update Book")]
+
+        [Authorize(Roles = Role.Admin)]
+        [HttpPut]
+        [Route("Update Book")]
         public IActionResult UpdateBook(BookModel bookModel, long bookid)
         {
             try
@@ -57,7 +64,10 @@ namespace BookStoreBackEndProject.Controllers
                 return this.BadRequest(new { Success = false, message = ex.Message });
             }
         }
-        [HttpDelete("Delete")]
+
+        [Authorize(Roles = Role.Admin)]
+        [HttpDelete]
+        [Route("Delete Book")]
         public IActionResult DeleteBook(long bookid)
         {
             try
@@ -78,7 +88,9 @@ namespace BookStoreBackEndProject.Controllers
                 return this.BadRequest(new { Success = false, message = ex.Message });
             }
         }
-        [HttpGet("Get all Books")]
+        [Authorize]
+        [HttpDelete]
+        [Route("Get All Book")]
         public IActionResult GetAllBooks()
         {
             try
@@ -98,7 +110,10 @@ namespace BookStoreBackEndProject.Controllers
                 throw;
             }
         }
-        [HttpGet("Get single Book")]
+
+        [Authorize(Roles = Role.Admin)]
+        [HttpDelete]
+        [Route("Get Book By Book Id")]
         public IActionResult GetBookDetail(long bookid)
         {
             try
@@ -119,7 +134,11 @@ namespace BookStoreBackEndProject.Controllers
                 return this.BadRequest(new { Success = false, message = ex.Message });
             }
         }
-        [HttpPost("Image Upload")]
+
+        [Authorize(Roles = Role.Admin)]
+        [HttpPost]
+        [Route("Image Uplaod")]
+
         public IActionResult BookImageUpdate([FromForm] ImageUploadModel imageUploadModel)
         {
             try

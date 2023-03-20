@@ -9,4 +9,7 @@ CREATE TABLE ADMINTABLE(
 Insert into ADMINTABLE (Admin_Name,Email_Id,Password,Mobile_Number) values 
 ('Lalit', 'lalitraghu@gmail.com', 'lalit123@', 8358814392)
 
+Insert into ADMINTABLE (Admin_Name,Email_Id,Password,Mobile_Number) values 
+('Dahrmesh Raghuwanshi', 'dharmeshraghu@gmail.com', 'dharmesh123@', 7974166398)
+
 SELECT * FROM ADMINTABLE

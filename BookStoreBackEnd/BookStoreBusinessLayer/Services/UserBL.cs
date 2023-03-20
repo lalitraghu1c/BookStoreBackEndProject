@@ -5,6 +5,7 @@ using BookStoreBusinessLayer.Interface;
 using BookStoreCommonLayer.Modal;
 using BookStoreCommonLayer.Model;
 using BookStoreRepositoryLayer.Interface;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace BookStoreBusinessLayer.Services
 {
@@ -62,5 +63,18 @@ namespace BookStoreBusinessLayer.Services
                 throw;
             }
         }
+        public UserRegistration UpdateUserDetail(UserRegistration userRegistration, long Id)
+        {
+            try
+            {
+                return iUserRL.UpdateUserDetail(userRegistration, Id);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

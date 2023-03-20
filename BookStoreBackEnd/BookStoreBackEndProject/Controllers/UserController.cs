@@ -67,10 +67,10 @@ namespace BookStoreBackEndProject.Controllers
         {
             try
             {
-                string token = iUserBL.ForgetPassword(email);
-                if (token != null)
+                string result = iUserBL.ForgetPassword(email);
+                if (result != null)
                 {
-                    return this.Ok(new { success = true, message = "Check your Email, Token has been sent Succesfully", data = token });
+                    return this.Ok(new { success = true, message = "Check your Email, Token has been sent Succesfully", data = result });
                 }
                 else
                 {
@@ -104,6 +104,27 @@ namespace BookStoreBackEndProject.Controllers
             catch (Exception)
             {
                 throw;
+            }
+        }
+        [HttpPut]
+        [Route("Update Detail for User")]
+        public IActionResult UpdateUserDetail(UserRegistration userRegistration, long Id)
+        {
+            try
+            {
+                var result = this.iUserBL.UpdateUserDetail(userRegistration, Id);
+                if (result != null)
+                {
+                    return this.Ok(new { Success = true, message = "User Detail Updated Sucessfull", data = result });
+                }
+                else
+                {
+                    return this.BadRequest(new { Success = false, message = "BUser details not updated" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
             }
         }
     }

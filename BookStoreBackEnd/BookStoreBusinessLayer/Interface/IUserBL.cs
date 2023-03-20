@@ -12,5 +12,6 @@ namespace BookStoreBusinessLayer.Interface
         public string LoginUser(UserLogin userLogin);
         public string ForgetPassword(string email);
         public bool ResetPassword(string email, ResetPasswordModel resetPasswordModel);
+        public UserRegistration UpdateUserDetail(UserRegistration userRegistration, long id);
     }
 }

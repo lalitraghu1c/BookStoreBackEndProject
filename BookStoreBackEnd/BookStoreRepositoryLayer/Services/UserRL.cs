@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using BookStoreCommonLayer.Modal;
@@ -155,7 +156,7 @@ namespace BookStoreRepositoryLayer.Services
                         cmd.Parameters.AddWithValue("@Password", resetPasswordModel.New_Password);
                         sqlConnection.Open();
                         int result = cmd.ExecuteNonQuery();
-                        if (result >= 0)
+                        if (result >= 1)
                         {
                             return true;
                         }
@@ -180,6 +181,35 @@ namespace BookStoreRepositoryLayer.Services
                 {
                     sqlConnection.Close();
                 }
+            }
+        }
+        public UserRegistration UpdateUserDetail(UserRegistration userRegistration, long Id)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            using (sqlConnection)
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("SPBookStoreUser", sqlConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@FullName", userRegistration.Full_Name);
+                    cmd.Parameters.AddWithValue("@Email_Id", userRegistration.Email_Id);
+                    cmd.Parameters.AddWithValue("@Password", userRegistration.Password);
+                    cmd.Parameters.AddWithValue("@Mobile_Number", userRegistration.Mobile_Number);
+                    sqlConnection.Open();
+                    int i = cmd.ExecuteNonQuery();
+                    sqlConnection.Close();
+                    if (i >= 1)
+                    {
+                        return userRegistration;
+                    }
+                    return null;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
             }
         }
     }

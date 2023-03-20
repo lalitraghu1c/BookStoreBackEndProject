@@ -11,5 +11,5 @@ Create Table BookTable(
 	BookCount INT NOT NULL
 )
 
-Select * from BookStoreDetail
+Select * from BookTable
 Drop table BookTable
