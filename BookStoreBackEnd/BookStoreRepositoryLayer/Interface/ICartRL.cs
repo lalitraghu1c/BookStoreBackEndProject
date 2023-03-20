@@ -9,6 +9,6 @@ namespace BookStoreRepositoryLayer.Interface
     {
         public CartModel AddCart(CartModel cartModel, long UserId);
         public bool RemoveCart(int CartId);
-
+        public CartModel UpdateCart(long CartId, CartModel cartModel, long UserId);
     }
 }

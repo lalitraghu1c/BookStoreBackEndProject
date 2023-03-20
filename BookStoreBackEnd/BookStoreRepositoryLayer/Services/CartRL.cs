@@ -79,5 +79,37 @@ namespace BookStoreRepositoryLayer.Services
                 throw ex;
             }
         }
+        public CartModel UpdateCart(long CartId, CartModel cartModel, long UserId)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            try
+            {
+                using (sqlConnection)
+                {
+                    SqlCommand cmd = new SqlCommand("Sp_UpdateCart", sqlConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@CartId ", CartId);
+                    cmd.Parameters.AddWithValue("@Book_Quantity ", cartModel.Book_Quantity);
+
+                    sqlConnection.Open();
+                    var result = cmd.ExecuteNonQuery();
+                    sqlConnection.Close();
+
+                    if (result != 0)
+                    {
+                        return cartModel;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

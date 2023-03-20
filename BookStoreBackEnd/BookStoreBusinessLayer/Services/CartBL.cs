@@ -38,5 +38,17 @@ namespace BookStoreBusinessLayer.Services
                 throw;
             }
         }
+        public CartModel UpdateCart(long CartId, CartModel cartModel, long UserId)
+        {
+            try
+            {
+                return icartRL.UpdateCart(CartId, cartModel, UserId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
