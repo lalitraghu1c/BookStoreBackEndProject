@@ -66,5 +66,30 @@ namespace BookStoreBackEndProject.Controllers
                 throw ex;
             }
         }
+        //[Authorize]
+        [HttpPut]
+        [Route("Update")]
+        public ActionResult UpdateCart(int cartId, CartModel cartModel)
+        {
+            try
+            {
+                var currentUser = HttpContext.User;
+                int UserId = Convert.ToInt32(currentUser.Claims.FirstOrDefault(c => c.Type == "Id").Value);
+
+                var result = icartBL.UpdateCart(cartId, cartModel, UserId);
+
+                if (result != null)
+                {
+                    return this.Ok(new { success = true, message = "Cart Updated", data = result });
+                }
+                return this.BadRequest(new { success = false, message = "Cart not updated", data = result });
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
     }
 }
