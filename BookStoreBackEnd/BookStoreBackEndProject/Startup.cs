@@ -48,6 +48,9 @@ namespace BookStoreBackEndProject
             services.AddTransient<ICartBL, CartBL>(); // cart
             services.AddTransient<ICartRL, CartRL>();
 
+            services.AddTransient<IWishlistBL, WishlistBL>(); // Wishlist
+            services.AddTransient<IWishlistRL, WishlistRL>();
+
             services.AddSwaggerGen();
             services.AddSwaggerGen(c => 
             {
