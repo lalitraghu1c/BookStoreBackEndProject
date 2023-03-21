@@ -23,7 +23,6 @@ namespace BookStoreBusinessLayer.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -35,9 +34,20 @@ namespace BookStoreBusinessLayer.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
+        public bool CancelOrder(int OrdersId)
+        {
+            try
+            {
+                return iOrderRL.CancelOrder(OrdersId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

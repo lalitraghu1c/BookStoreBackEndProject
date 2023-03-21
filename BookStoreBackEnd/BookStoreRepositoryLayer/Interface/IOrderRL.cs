@@ -9,5 +9,6 @@ namespace BookStoreRepositoryLayer.Interface
     {
         public OrderModel AddOrder(OrderModel orderModel, long Id);
         public List<GetOrderModel> GetOrders();
+        public bool CancelOrder(int OrdersId);
     }
 }

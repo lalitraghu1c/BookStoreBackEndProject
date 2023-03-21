@@ -64,5 +64,26 @@ namespace BookStoreBackEndProject.Controllers
                 throw;
             }
         }
+        [HttpDelete]
+        [Route("Cancel Order")]
+        public IActionResult CancelOrder(int OrdersId)
+        {
+            try
+            {
+                var result = iOrderBL.CancelOrder(OrdersId);
+                if (result)
+                {
+                    return Ok(new { success = true, message = "Order cancelled successfully." });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "Try Again" });
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

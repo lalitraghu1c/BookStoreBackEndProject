@@ -73,5 +73,32 @@ namespace BookStoreRepositoryLayer.Services
             sqlConnection.Close();
             return getAllOrderModel;
         }
+        public bool CancelOrder(int OrdersId)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SPCancelOrder", sqlConnection);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                sqlConnection.Open();
+
+                cmd.Parameters.AddWithValue("@OrdersId", OrdersId);
+
+                int result = cmd.ExecuteNonQuery();
+                if (result > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally { sqlConnection.Close(); }
+        }
     }
 }
