@@ -36,16 +36,16 @@ namespace BookStoreBackEndProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddTransient<IUserBL, UserBL>(); // user
+            services.AddTransient<IUserBL, UserBL>(); // User
             services.AddTransient<IUserRL, UserRL>();
 
-            services.AddTransient<IAdminBL, AdminBL>(); // admin
+            services.AddTransient<IAdminBL, AdminBL>(); // Admin
             services.AddTransient<IAdminRL, AdminRL>();
 
-            services.AddTransient<IBookBL, BookBL>(); // book
+            services.AddTransient<IBookBL, BookBL>(); // Book
             services.AddTransient<IBookRL, BookRL>();
 
-            services.AddTransient<ICartBL, CartBL>(); // cart
+            services.AddTransient<ICartBL, CartBL>(); // Cart
             services.AddTransient<ICartRL, CartRL>();
 
             services.AddTransient<IWishlistBL, WishlistBL>(); // Wishlist
@@ -56,6 +56,9 @@ namespace BookStoreBackEndProject
 
             services.AddTransient<IAddressBL, AddressBL>(); // Address
             services.AddTransient<IAddressRL, AddressRL>();
+
+            services.AddTransient<IOrderRL, OrderRL>(); // Order
+            services.AddTransient<IOrderBL, OrderBL>();
 
             services.AddSwaggerGen();
             services.AddSwaggerGen(c => 

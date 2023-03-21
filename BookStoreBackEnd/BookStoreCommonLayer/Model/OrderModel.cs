@@ -4,11 +4,11 @@ using System.Text;
 
 namespace BookStoreCommonLayer.Model
 {
-    public class GetCartByUser
+    public class OrderModel
     {
-        public long CartId { get; set; }
         public long Id { get; set; }
+        public int AddressId { get; set; }
         public long Book_Id { get; set; }
-        public int BookCount { get; set; }
+        public int TotalQuantity { get; set; }
     }
 }

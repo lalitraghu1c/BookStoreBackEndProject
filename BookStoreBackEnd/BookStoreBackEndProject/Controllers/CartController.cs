@@ -80,7 +80,7 @@ namespace BookStoreBackEndProject.Controllers
 
                 if (result != null)
                 {
-                    return this.Ok(new { success = true, message = "Cart Updated", data = result });
+                    return this.Ok(new { success = true, message = "Cart Updated Successfully", data = result });
                 }
                 return this.BadRequest(new { success = false, message = "Cart not updated", data = result });
 

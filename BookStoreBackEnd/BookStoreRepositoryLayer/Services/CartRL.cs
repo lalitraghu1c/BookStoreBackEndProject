@@ -28,7 +28,7 @@ namespace BookStoreRepositoryLayer.Services
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@Book_Id ", cartModel.Book_Id);
-                    cmd.Parameters.AddWithValue("@Book_Quantity ", cartModel.Book_Quantity);
+                    cmd.Parameters.AddWithValue("@BookCount ", cartModel.BookCount);
                     cmd.Parameters.AddWithValue("@Id ", UserId);
 
                     sqlConnection.Open();
@@ -90,7 +90,7 @@ namespace BookStoreRepositoryLayer.Services
                     SqlCommand cmd = new SqlCommand("Sp_UpdateCart", sqlConnection);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@CartId ", CartId);
-                    cmd.Parameters.AddWithValue("@Book_Quantity ", cartModel.Book_Quantity);
+                    cmd.Parameters.AddWithValue("@BookCount ", cartModel.BookCount);
 
                     sqlConnection.Open();
                     var result = cmd.ExecuteNonQuery();
@@ -138,7 +138,7 @@ namespace BookStoreRepositoryLayer.Services
                     getCartByUser.CartId = Convert.ToInt32(rdr["CartId"]);
                     getCartByUser.Id = Convert.ToInt32(rdr["Id"]);
                     getCartByUser.Book_Id = Convert.ToInt32(rdr["Book_Id"]);
-                    getCartByUser.Book_Quantity = Convert.ToInt32(rdr["Book_Quantity"]);
+                    getCartByUser.BookCount = Convert.ToInt32(rdr["BookCount"]);
                     GetCartOfUserList.Add(getCartByUser);
                 }
                 sqlConnection.Close();
@@ -184,7 +184,7 @@ namespace BookStoreRepositoryLayer.Services
                     getCartByUser.CartId = Convert.ToInt32(rdr["CartId"]);
                     getCartByUser.Id = Convert.ToInt32(rdr["Id"]);
                     getCartByUser.Book_Id = Convert.ToInt32(rdr["Book_Id"]);
-                    getCartByUser.Book_Quantity = Convert.ToInt32(rdr["Book_Quantity"]);
+                    getCartByUser.BookCount = Convert.ToInt32(rdr["BookCount"]);
                     GetCartOfUserList.Add(getCartByUser);
                 }
                 sqlConnection.Close();

@@ -6,6 +6,6 @@ namespace BookStoreCommonLayer.Model
 {
     public class CartByUser
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
     }
 }
