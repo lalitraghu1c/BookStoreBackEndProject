@@ -32,20 +32,6 @@ Create Table BookStoreDetail(
 Select * from BookStoreDetail
 Drop Table BookStoreDetail
 
------------Creating Address table--------------
-
-
-create table Addresses(
-    AddressId int NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	Address varchar(300) not null,
-	City varchar(100),
-	State varchar(100),
-	TypeId int FOREIGN KEY (TypeId) REFERENCES AddressType(TypeId),
-	Id bigint NOT NULL FOREIGN KEY (Id) REFERENCES BookStoreUser(Id),
-)
-
-select * from Addresses
-
 -----------Creating Order table--------------
 
 
