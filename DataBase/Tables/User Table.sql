@@ -30,18 +30,7 @@ Create Table BookStoreDetail(
 )
 
 Select * from BookStoreDetail
-
-----------Creating Cart Table----------------
-
-
-CREATE TABLE CartDetail(
-	CartId bigint NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	Id bigint NOT NULL	FOREIGN KEY (Id) REFERENCES BookStoreUser(Id),
-	Book_Id bigint NOT NULL	FOREIGN KEY (Book_Id) REFERENCES BookStoreDetail(Book_Id),	
-	Quantity int default 1
-)
-
-Select * from CartDetail
+Drop Table BookStoreDetail
 
 -----------Creating Address table--------------
 
@@ -72,15 +61,3 @@ create table OrderTable(
 
 select * from OrderTable
 
-------------Create feedback table---------------
-
-
-create table Feedback(
-	FeedbackId int identity(1,1) not null primary key,
-	Id bigint not null foreign key (Id) References BookStoreUser(Id),
-	Book_Id bigint not null foreign key (Book_Id) References BookStoreDetail(Book_Id),
-	Comment varchar(300),
-	Ratings int
-)
-
-select * from Feedback;

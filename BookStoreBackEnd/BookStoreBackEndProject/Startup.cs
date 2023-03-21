@@ -51,6 +51,9 @@ namespace BookStoreBackEndProject
             services.AddTransient<IWishlistBL, WishlistBL>(); // Wishlist
             services.AddTransient<IWishlistRL, WishlistRL>();
 
+            services.AddTransient<IFeedbackBL, FeedbackBL>(); // Feedback
+            services.AddTransient<IFeedbackRL, FeedbackRL>();
+
             services.AddSwaggerGen();
             services.AddSwaggerGen(c => 
             {
